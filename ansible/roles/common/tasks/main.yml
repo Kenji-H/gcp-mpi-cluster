@@ -1,0 +1,6 @@
+- name: Install common packages
+  yum: name={{ item }} state=installed
+  with_items:
+   - emacs
+   - mpich
+   - mpich-devel
