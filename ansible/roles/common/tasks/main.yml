@@ -4,6 +4,8 @@
    - emacs
    - mpich
    - mpich-devel
+  become: True
+  become_method: sudo
 
 - name: Create the MPI user
   user: name=mpiusr comment="MPI user"
