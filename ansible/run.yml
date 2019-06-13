@@ -1,0 +1,13 @@
+- hosts: all
+  tasks: 
+    - name: run MPI program
+      shell: /usr/lib64/mpich/bin/mpirun -np 5 ./hello
+      args:
+        chdir: "{{ mpi_work_dir }}"
+      become: yes
+      become_user: mpiusr
+      register: result
+
+    - name: show result
+      debug: 
+        msg: "{{ result.stdout_lines }}"
