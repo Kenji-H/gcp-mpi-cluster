@@ -22,13 +22,3 @@
     recurse: True
   become: True
   become_method: sudo
-
-- name: Copy sample programs
-  copy:
-    src: ../files/hello.cpp
-    dest: "{{ mpi_work_dir }}/hello.cpp"
-    owner: mpiusr
-    group: mpiusr
-    mode: 0644
-  become: True
-  become_method: sudo
