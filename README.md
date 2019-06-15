@@ -1,9 +1,22 @@
-gcp-mpi-cluster
+GCP MPI Cluster
 =====================================================
 
-## Terraform
+Need a distributed computing cluster?
 
-### Preperations
+This tool automates the creation of the [MPI] (https://en.wikipedia.org/wiki/Message_Passing_Interface) computing environment.  
+All you need is write several lines of settings and run a command. 
+That's it! Very simple.
+
+## Prerequisites
+Install the following tools.
+
+- [Ansible] (https://www.ansible.com/)
+- [Terraform] (https://www.terraform.io/)
+- [jq] (https://stedolan.github.io/jq/)
+
+## Create cluster
+
+#### setup
 - download your GCP sevice account key and save it as `terraform/account.json`.
 - create `terraform/terraform.tfvars` and set your GCP project configuration.
 
@@ -13,29 +26,35 @@ region = "YOUR_REGION_NAME"
 zone = "YOUR_ZONE_NAME"
 ```
 
-### Plan
+#### launch cluster
+The following command will launch instances and set up the MPI enviroment.
+
 ```
-$ terraform plan
+$ ./create_cluster
 ```
 
-### Apply
+## Run MPI program on cluster
+#### compile the program
+The following command will send source code to nodes in cluster and compile the code remotely.
+
 ```
-$ terraform apply
+$ ./compile
 ```
 
-## Ansible
-### Install
+#### execute the program
+The following command will execute the program on the cluster.
+
 ```
-$ ansible-playbook site.yml -i hosts
+$ ./run
 ```
 
-### Compile
+## Destroy cluster
+After playing with the cluster, please destroy the cluster to save money. You can create a cluster from scrach using the `create_cluster` command when necessary.
+
 ```
-$ ansible-playbook compile.yml -i hosts
+$ ./destroy_cluster
 ```
 
-### Run
-```
-$ ansible-playbook run.yml -i hosts
-```
-
+## Disclaimer
+- This project is inteded for indivisual use case, not for bussiness use case.
+- We are not responsible for any errors or problems, or results obtained from the use of this project.
