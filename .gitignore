@@ -5,9 +5,13 @@
 *.retry
 
 # terraform
-account.json
 .terraform/
 *.tfvars
 *.tfstate
 *.tfstate.backup
 
+# credentials
+account.json
+
+# auto generated files
+id_rsa.pub
