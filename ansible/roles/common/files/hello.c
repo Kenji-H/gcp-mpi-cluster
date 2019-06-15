@@ -3,14 +3,18 @@
 
 int main(int argc, char **argv){
 
-  MPI_Init(&argc, &argv);
+	MPI_Init(&argc, &argv);
 
-  int rank;
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	int rank;
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-  printf("%d: hello world!!\n", rank);
+	int len;
+	char processor[256];
+	MPI_Get_processor_name(processor, &len);
 
-  MPI_Finalize();
+	printf("%s-%d: hello world!!\n", processor, rank);
 
-  return 0;
+	MPI_Finalize();
+
+	return 0;
 }
