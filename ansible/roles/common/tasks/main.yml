@@ -4,6 +4,7 @@
    - emacs
    - mpich
    - mpich-devel
+   - gcc-c++
   become: True
   become_method: sudo
 
@@ -24,8 +25,8 @@
 
 - name: Copy sample programs
   copy:
-    src: ../files/hello.c
-    dest: "{{ mpi_work_dir }}/hello.c"
+    src: ../files/hello.cpp
+    dest: "{{ mpi_work_dir }}/hello.cpp"
     owner: mpiusr
     group: mpiusr
     mode: 0644
