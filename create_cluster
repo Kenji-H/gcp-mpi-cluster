@@ -1,0 +1,20 @@
+#!/bin/bash
+
+cd "$(dirname "$0")"
+
+# Start up Google Compute Engine instances
+cd terraform
+terraform apply
+
+# Retrieve instance IPs
+cat <<EOS >../ansible/hosts
+[master]
+$(terraform output -json instance_ips | jq '.[0]' | tr -d '"')
+
+[slave]
+$(terraform output -json instance_ips | jq -r '.[1:] | join("\n")' | tr -d '"')
+EOS
+
+# Configure MPI cluster
+cd ../ansible
+ansible-playbook site.yml -i hosts

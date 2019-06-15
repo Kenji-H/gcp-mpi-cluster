@@ -4,8 +4,8 @@ provider "google" {
   region      = "${var.region}"
 }
 
-resource "google_compute_instance" "default" {
-  count        = 3
+resource "google_compute_instance" "mpi_nodes" {
+  count        = 5
   name         = "${format("mpi-%d", count.index)}"
   machine_type = "n1-standard-1"
   zone         = "${var.zone}"
