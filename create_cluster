@@ -6,12 +6,21 @@ cd "$(dirname "$0")"
 cd terraform
 terraform apply
 
-# Retrieve instance IPs
+# Create ansible hosts file
 cat <<EOS >../ansible/hosts
 [master]
 $(terraform output -json instance_ips | jq '.[0]' | tr -d '"')
 
 [slave]
+$(terraform output -json instance_ips | jq -r '.[1:] | join("\n")' | tr -d '"')
+EOS
+
+# Create MPI hosts file
+cat <<EOS >../ansible/roles/master/files/hosts
+# master
+$(terraform output -json instance_ips | jq '.[0]' | tr -d '"')
+
+# slave
 $(terraform output -json instance_ips | jq -r '.[1:] | join("\n")' | tr -d '"')
 EOS
 

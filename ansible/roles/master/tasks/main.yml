@@ -33,10 +33,10 @@
   become: yes
   become_method: sudo
 
-- name: Copy host file
+- name: Copy hosts file
   copy:
-    src: ../files/host
-    dest: "{{ mpi_work_dir }}/host"
+    src: ../files/hosts
+    dest: "{{ mpi_work_dir }}/hosts"
     owner: mpiusr
     group: mpiusr
     mode: 0644
