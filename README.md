@@ -26,16 +26,16 @@ $ terraform apply
 ## Ansible
 ### Install
 ```
-$ ansible-playbook site.yml -i hosts --private-key=~/.ssh/google_compute_engine
+$ ansible-playbook site.yml -i hosts
 ```
 
 ### Compile
 ```
-$ ansible-playbook compile.yml -i hosts --private-key=~/.ssh/google_compute_engine
+$ ansible-playbook compile.yml -i hosts
 ```
 
 ### Run
 ```
-$ ansible-playbook run.yml -i hosts --private-key=~/.ssh/google_compute_engine
+$ ansible-playbook run.yml -i hosts
 ```
 
