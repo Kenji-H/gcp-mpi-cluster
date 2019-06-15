@@ -7,5 +7,7 @@
 # terraform
 account.json
 .terraform/
-*.tfstate
 *.tfvars
+*.tfstate
+*.tfstate.backup
+
