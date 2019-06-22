@@ -1,3 +1,7 @@
+- name: Wait for server to become reachable
+  wait_for_connection:
+    timeout: 300
+
 - name: Install common packages
   yum:
     name: [
