@@ -34,18 +34,32 @@ $ ./create_cluster
 ```
 
 ## Run MPI program on cluster
+Please save your program in `app` directory following the existing directory structure.
+
+```
+$ cd app
+$ tree
+.
+├── divisor
+│   └── main.cpp
+└── hello
+    └── main.cpp
+```  
+
+The below example assumes that you want to run `hello/main.cpp` on the cluster.
+
 #### compile the program
 The following command will send source code to nodes in cluster and compile the code remotely.
 
 ```
-$ ./compile
+$ ./compile hello
 ```
 
 #### execute the program
 The following command will execute the program on the cluster.
 
 ```
-$ ./run
+$ ./run hello
 ```
 
 ## Destroy cluster
