@@ -1,1 +1,3 @@
 mpi_work_dir: /work/mpi
+
+program: hello

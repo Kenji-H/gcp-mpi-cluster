@@ -2,7 +2,7 @@
   tasks: 
     - name: Create Work Directory
       file:
-        path: "{{ mpi_work_dir }}/hello"
+        path: "{{ mpi_work_dir }}/{{ program }}"
         state: directory
         owner: mpiusr
         group: mpiusr
@@ -11,8 +11,8 @@
 
     - name: Copy MPI programs
       copy:
-        src: ../app/hello/main.cpp
-        dest: "{{ mpi_work_dir }}/hello/main.cpp"
+        src: "../app/{{ program }}/main.cpp"
+        dest: "{{ mpi_work_dir }}/{{ program }}/main.cpp"
         owner: mpiusr
         group: mpiusr
         mode: 0644
@@ -20,7 +20,7 @@
       become_method: sudo
 
     - name: Compile MPI program
-      shell: /usr/lib64/mpich/bin/mpic++ hello/main.cpp -o hello/main
+      shell: "/usr/lib64/mpich/bin/mpic++ {{ program }}/main.cpp -o {{ program }}/main"
       args:
         chdir: "{{ mpi_work_dir }}"
       become: yes

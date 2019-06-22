@@ -1,7 +1,7 @@
 - hosts: master
   tasks: 
     - name: run MPI program
-      shell: "/usr/lib64/mpich/bin/mpirun --hostfile hosts {{ mpi_work_dir }}/hello/main"
+      shell: "/usr/lib64/mpich/bin/mpirun --hostfile hosts {{ mpi_work_dir }}/{{ program }}/main"
       args:
         chdir: "{{ mpi_work_dir }}"
       become: yes

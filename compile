@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PROGRAM=${1:-hello}
+
 cd "$(dirname "$0")"
 cd ansible
-ansible-playbook compile.yml -i hosts
+ansible-playbook compile.yml -i hosts --extra-vars "program=${PROGRAM}"
