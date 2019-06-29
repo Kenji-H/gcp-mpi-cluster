@@ -28,3 +28,13 @@
     recurse: True
   become: True
   become_method: sudo
+
+- name: Add mpi to PATH
+  copy:
+    src: ../files/bash_profile
+    dest: "/home/mpiusr/.bash_profile"
+    owner: mpiusr
+    group: mpiusr
+    mode: 0644
+  become: True
+  become_method: sudo
