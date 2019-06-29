@@ -1,11 +1,11 @@
 - hosts: master
+  become: yes
+  become_user: mpiusr
   tasks: 
     - name: run MPI program
       shell: "/usr/lib64/mpich/bin/mpirun --hostfile hosts {{ mpi_work_dir }}/{{ program }}/main"
       args:
         chdir: "{{ mpi_work_dir }}"
-      become: yes
-      become_user: mpiusr
       register: result
 
     - name: show result

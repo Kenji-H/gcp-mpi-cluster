@@ -1,4 +1,6 @@
 - hosts: all
+  become: yes
+  become_user: mpiusr
   tasks: 
     - name: Create Work Directory
       file:
@@ -6,8 +8,6 @@
         state: directory
         owner: mpiusr
         group: mpiusr
-      become: True
-      become_method: sudo
 
     - name: Copy MPI programs
       copy:
@@ -16,12 +16,8 @@
         owner: mpiusr
         group: mpiusr
         mode: 0644
-      become: True
-      become_method: sudo
 
     - name: Compile MPI program
       shell: "/usr/lib64/mpich/bin/mpic++ {{ program }}/main.cpp -o {{ program }}/main"
       args:
         chdir: "{{ mpi_work_dir }}"
-      become: yes
-      become_user: mpiusr

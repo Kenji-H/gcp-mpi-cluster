@@ -1,37 +1,19 @@
 - name: Generate ssh key
   shell: yes | ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa
-  become: yes
-  become_user: mpiusr
 
 - name: Register public key
   shell: cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
-  become: yes
-  become_user: mpiusr
 
 - name: Change authorized_keys mode
   file:
     path: ~/.ssh/authorized_keys
     mode: 0600
-  become: yes
-  become_user: mpiusr
 
 - name: Fetch public key
   fetch:
     src: ~/.ssh/id_rsa.pub
     dest: roles/slave/files/
     flat: yes
-  become: yes
-  become_user: mpiusr
-
-- name: Disable strict host key checking
-  copy:
-    src: ../files/ssh_config
-    dest: /etc/ssh/ssh_config
-    owner: root
-    group: root
-    mode: 0644
-  become: yes
-  become_method: sudo
 
 - name: Copy hosts file
   copy:
@@ -40,5 +22,3 @@
     owner: mpiusr
     group: mpiusr
     mode: 0644
-  become: True
-  become_method: sudo

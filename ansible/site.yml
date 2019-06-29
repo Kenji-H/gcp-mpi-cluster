@@ -1,12 +1,24 @@
 - hosts: all
   gather_facts: no
+  tasks:
+  - name: Wait for server to become reachable
+    wait_for_connection:
+      timeout: 300
+
+- hosts: all
+  become: yes
+  become_method: sudo
   roles:
   - role: common
 
 - hosts: master
+  become: yes
+  become_user: mpiusr
   roles:
   - role: master
 
 - hosts: slave
+  become: yes
+  become_user: mpiusr
   roles:
   - role: slave

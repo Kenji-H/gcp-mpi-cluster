@@ -5,8 +5,6 @@
     owner: mpiusr
     group: mpiusr
     mode: 0700
-  become: yes
-  become_user: mpiusr
 
 - name: Copy public key
   copy:
@@ -14,17 +12,11 @@
     dest: ~/.ssh/id_rsa.pub
     owner: mpiusr
     group: mpiusr
-  become: yes
-  become_user: mpiusr
 
 - name: Register public key
   shell: cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
-  become: yes
-  become_user: mpiusr
 
 - name: Change authorized_keys mode
   file:
     path: ~/.ssh/authorized_keys
     mode: 0600
-  become: yes
-  become_user: mpiusr
